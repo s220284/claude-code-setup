@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelly Palmer's Claude Code Project Setup - Programmer's Guide</title>
+    <meta name="description" content="Comprehensive guide for setting up AI-assisted development projects with Claude Code">
+    <meta name="author" content="Shelly Palmer">
+    <style>
+        :root {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-tertiary: #0f3460;
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+            --accent: #e94560;
+            --accent-secondary: #0ea5e9;
+            --code-bg: #0d1117;
+            --border: #30363d;
+            --success: #22c55e;
+            --warning: #eab308;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        header .author {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        header .version {
+            color: var(--accent-secondary);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        header .subtitle {
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        nav {
+            background: var(--bg-secondary);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 1.5rem;
+            justify-content: center;
+            min-width: max-content;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            white-space: nowrap;
+            padding: 0.5rem 0;
+            display: block;
+        }
+
+        nav a:hover, nav a:focus {
+            color: var(--accent);
+        }
+
+        section {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+            word-wrap: break-word;
+        }
+
+        h3 {
+            color: var(--accent-secondary);
+            font-size: 1.3rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        h4 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin: 1.2rem 0 0.8rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        ul, ol {
+            color: var(--text-secondary);
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.3rem;
+        }
+
+        code {
+            background: var(--code-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+            font-size: 0.85em;
+            color: var(--accent-secondary);
+            word-break: break-word;
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+        }
+
+        pre code {
+            padding: 0;
+            background: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            word-break: normal;
+        }
+
+        /* Mobile-friendly tables */
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 500px;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        .file-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .file-card h4 {
+            color: var(--accent);
+            margin-top: 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .file-card .purpose {
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .badge-required {
+            background: var(--accent);
+            color: white;
+        }
+
+        .badge-optional {
+            background: var(--accent-secondary);
+            color: white;
+        }
+
+        .badge-new {
+            background: var(--success);
+            color: white;
+        }
+
+        .tip, .warning, .critical {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tip {
+            background: rgba(14, 165, 233, 0.1);
+            border-left: 4px solid var(--accent-secondary);
+        }
+
+        .warning {
+            background: rgba(234, 179, 8, 0.1);
+            border-left: 4px solid var(--warning);
+        }
+
+        .critical {
+            background: rgba(233, 69, 96, 0.1);
+            border-left: 4px solid var(--accent);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .flow-diagram {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.8rem;
+            white-space: pre;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            line-height: 1.4;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: var(--accent-secondary);
+            text-decoration: none;
+        }
+
+        /* Touch-friendly tap targets */
+        a, button {
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        nav a {
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Tablet breakpoint */
+        @media (min-width: 600px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            pre {
+                padding: 1.25rem;
+            }
+
+            pre code {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Desktop breakpoint */
+        @media (min-width: 900px) {
+            .container {
+                padding: 2rem;
+            }
+
+            section {
+                margin: 3rem 0;
+                padding: 2rem;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            pre {
+                padding: 1.5rem;
+            }
+
+            th, td {
+                padding: 0.8rem 1rem;
+            }
+        }
+
+        /* Large desktop */
+        @media (min-width: 1100px) {
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        /* Mobile specific */
+        @media (max-width: 599px) {
+            .container {
+                padding: 0.75rem;
+            }
+
+            header {
+                padding: 1.5rem 1rem;
+            }
+
+            header .author {
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+                line-height: 1.3;
+            }
+
+            header .version {
+                font-size: 0.9rem;
+            }
+
+            header .subtitle {
+                font-size: 0.95rem;
+            }
+
+            nav {
+                padding: 0.75rem 1rem;
+            }
+
+            nav ul {
+                justify-content: flex-start;
+                gap: 1rem;
+                padding: 0 0.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            section {
+                margin: 1rem 0;
+                padding: 1rem;
+                border-radius: 8px;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            h3 {
+                font-size: 1.15rem;
+            }
+
+            h4 {
+                font-size: 1rem;
+            }
+
+            .file-card {
+                padding: 1rem;
+            }
+
+            .file-card h4 {
+                font-size: 0.95rem;
+            }
+
+            pre {
+                padding: 0.75rem;
+                font-size: 0.8rem;
+                border-radius: 6px;
+            }
+
+            pre code {
+                font-size: 0.8rem;
+            }
+
+            code {
+                font-size: 0.8em;
+                padding: 0.15rem 0.35rem;
+            }
+
+            table {
+                min-width: 400px;
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 0.5rem 0.6rem;
+            }
+
+            .flow-diagram {
+                padding: 0.75rem;
+                font-size: 0.7rem;
+            }
+
+            .tip, .warning, .critical {
+                padding: 0.75rem;
+                font-size: 0.95rem;
+            }
+
+            footer {
+                padding: 1.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            nav {
+                display: none;
+            }
+
+            section {
+                break-inside: avoid;
+                border: 1px solid #ccc;
+            }
+
+            .file-card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="author">Shelly Palmer</div>
+        <h1>Claude Code Project Setup</h1>
+        <div class="version">Version 2.0 - January 2026</div>
+        <p class="subtitle">Comprehensive Programmer's Guide for AI-Assisted Development</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#quickstart">Quick Start</a></li>
+            <li><a href="#files">Files Created</a></li>
+            <li><a href="#subagents">Subagents</a></li>
+            <li><a href="#planning">Planning Mode</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#mcp">MCP</a></li>
+            <li><a href="#workflow">Workflow</a></li>
+            <li><a href="#reference">Reference</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <!-- OVERVIEW -->
+        <section id="overview">
+            <h2>Overview</h2>
+
+            <p>The <code>setup-claude-project.sh</code> script creates a complete project structure optimized for development with Claude Code, Anthropic's AI-powered coding assistant. It establishes documentation, configuration, and workflow patterns that enable effective human-AI collaboration.</p>
+
+            <h3>What This Script Does</h3>
+            <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1rem;">
+                <li>Creates standardized project documentation</li>
+                <li>Sets up session continuity files for multi-session work</li>
+                <li>Configures MCP (Model Context Protocol) infrastructure</li>
+                <li>Establishes skill definitions for automated workflows</li>
+                <li>Creates CI/CD pipeline templates</li>
+                <li>Initializes git repository with comprehensive commit</li>
+            </ul>
+
+            <h3>Version 2.0 Features</h3>
+            <div class="grid">
+                <div class="file-card">
+                    <h4><span class="badge badge-new">New</span> Subagent Documentation</h4>
+                    <p>Comprehensive guidance on using Explore, Plan, Bash, and general-purpose subagents for different task types.</p>
+                </div>
+                <div class="file-card">
+                    <h4><span class="badge badge-new">New</span> Planning Mode</h4>
+                    <p>Documentation for EnterPlanMode/ExitPlanMode workflow for complex implementations.</p>
+                </div>
+                <div class="file-card">
+                    <h4><span class="badge badge-new">New</span> Model Selection</h4>
+                    <p>Guidance on choosing haiku, sonnet, or opus based on task complexity and cost.</p>
+                </div>
+                <div class="file-card">
+                    <h4><span class="badge badge-new">New</span> Cloud-First Patterns</h4>
+                    <p>Best practices for writing code that runs in cloud environments, not just locally.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUICK START -->
+        <section id="quickstart">
+            <h2>Quick Start</h2>
+
+            <h3>Installation</h3>
+            <pre><code># Download or copy the script
+chmod +x setup-claude-project.sh
+
+# Run with arguments
+./setup-claude-project.sh MyProject "A web application for task management"
+
+# Or run interactively
+./setup-claude-project.sh</code></pre>
+
+            <h3>After Setup</h3>
+            <pre><code># Navigate to your project
+cd MyProject
+
+# Start Claude Code
+claude
+
+# Claude will automatically load CLAUDE.md and understand your project structure</code></pre>
+
+            <div class="tip">
+                <strong>Tip:</strong> Claude Code automatically reads CLAUDE.md at the start of each session. This file contains everything Claude needs to understand your project's conventions, tools, and workflows.
+            </div>
+        </section>
+
+        <!-- FILES CREATED -->
+        <section id="files">
+            <h2>Files Created</h2>
+
+            <p>The script creates a comprehensive set of files, each with a specific purpose in the Claude Code workflow.</p>
+
+            <h3>Core Documentation Files</h3>
+
+            <div class="file-card">
+                <h4>CLAUDE.md <span class="badge badge-required">Required</span></h4>
+                <p class="purpose">Main session reference - auto-loaded by Claude Code</p>
+                <p>This is the most important file. It contains:</p>
+                <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
+                    <li>Project overview and description</li>
+                    <li>Critical warnings (shell script line endings, cloud-first development)</li>
+                    <li>Subagent system documentation</li>
+                    <li>Planning mode workflow</li>
+                    <li>Engineering workflow requirements</li>
+                    <li>Code conventions</li>
+                    <li>Quick command reference</li>
+                </ul>
+            </div>
+
+            <div class="file-card">
+                <h4>PROJECT_STATE.md <span class="badge badge-required">Required</span></h4>
+                <p class="purpose">Current system status snapshot</p>
+                <p>Tracks what's working, what's broken, and what needs attention. Update after completing features.</p>
+                <table>
+                    <tr><th>Section</th><th>Purpose</th></tr>
+                    <tr><td>System Status</td><td>Component-by-component health check</td></tr>
+                    <tr><td>Production State</td><td>Version, environment, URLs</td></tr>
+                    <tr><td>Critical Files</td><td>Files that must not break</td></tr>
+                    <tr><td>Recent Changes</td><td>Changelog summary</td></tr>
+                    <tr><td>Known Issues</td><td>Active bugs or blockers</td></tr>
+                </table>
+            </div>
+
+            <div class="file-card">
+                <h4>SESSION_LOG.md <span class="badge badge-required">Required</span></h4>
+                <p class="purpose">Append-only work history</p>
+                <p>Each session adds an entry documenting:</p>
+                <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
+                    <li>Summary of work completed</li>
+                    <li>Files created or modified</li>
+                    <li>Decisions made and their reasoning</li>
+                    <li>Next steps for future sessions</li>
+                    <li>Open questions requiring answers</li>
+                </ul>
+                <div class="warning">
+                    <strong>Important:</strong> Always update this file at the end of every session. It's the primary continuity mechanism for multi-session work.
+                </div>
+            </div>
+
+            <div class="file-card">
+                <h4>CONTINUATION_GUIDE.md</h4>
+                <p class="purpose">Quick-start commands for resuming work</p>
+                <p>Contains copy-paste commands for common tasks when returning to the project.</p>
+            </div>
+
+            <div class="file-card">
+                <h4>agents.md</h4>
+                <p class="purpose">Comprehensive agent instructions</p>
+                <p>Detailed documentation for AI agents including subagent architecture, development environment setup, code conventions, and session protocols.</p>
+            </div>
+
+            <div class="file-card">
+                <h4>skills.md</h4>
+                <p class="purpose">Skills and commands reference</p>
+                <p>Documents available skills (automated workflows), how to create custom skills, and built-in Claude Code commands.</p>
+            </div>
+
+            <div class="file-card">
+                <h4>STANDARDS.md</h4>
+                <p class="purpose">Protocol reference</p>
+                <p>Reference documentation for MCP, Claude Code tools, Anthropic SDK, and deployment patterns.</p>
+            </div>
+
+            <h3>Configuration Files</h3>
+
+            <div class="file-card">
+                <h4>.claude/settings.json</h4>
+                <p class="purpose">MCP server and permissions configuration</p>
+                <pre><code>{
+  "mcpServers": { },
+  "permissions": {
+    "allow": [],
+    "deny": []
+  },
+  "hooks": { }
+}</code></pre>
+            </div>
+
+            <div class="file-card">
+                <h4>.claude/skills/commit/SKILL.md</h4>
+                <p class="purpose">Example skill definition</p>
+                <p>A working example of a commit skill that demonstrates skill structure, blocking gates, and execution steps.</p>
+            </div>
+
+            <div class="file-card">
+                <h4>.github/workflows/ci.yml</h4>
+                <p class="purpose">CI/CD pipeline template</p>
+                <p>GitHub Actions workflow for running tests on push and pull requests.</p>
+            </div>
+        </section>
+
+        <!-- SUBAGENTS -->
+        <section id="subagents">
+            <h2>Subagent System</h2>
+
+            <p>Claude Code uses specialized subagents for different tasks. Each subagent has specific capabilities and tools available to it.</p>
+
+            <h3>Available Subagents</h3>
+
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Purpose</th>
+                    <th>Tools</th>
+                    <th>Best For</th>
+                </tr>
+                <tr>
+                    <td><code>Explore</code></td>
+                    <td>Fast codebase exploration</td>
+                    <td>Glob, Grep, Read</td>
+                    <td>Finding files, understanding structure</td>
+                </tr>
+                <tr>
+                    <td><code>Plan</code></td>
+                    <td>Implementation design</td>
+                    <td>All tools</td>
+                    <td>Architecture decisions, planning</td>
+                </tr>
+                <tr>
+                    <td><code>Bash</code></td>
+                    <td>Command execution</td>
+                    <td>Bash only</td>
+                    <td>Git operations, builds, terminal tasks</td>
+                </tr>
+                <tr>
+                    <td><code>general-purpose</code></td>
+                    <td>Complex tasks</td>
+                    <td>All tools</td>
+                    <td>Multi-step research, anything else</td>
+                </tr>
+            </table>
+
+            <h3>When to Use Each Subagent</h3>
+
+            <div class="grid">
+                <div class="file-card">
+                    <h4>Use Explore When:</h4>
+                    <ul style="color: var(--text-secondary); margin-left: 1rem;">
+                        <li>"Where is X implemented?"</li>
+                        <li>"How does authentication work?"</li>
+                        <li>"Find all files that handle payments"</li>
+                        <li>Quick codebase searches</li>
+                    </ul>
+                </div>
+                <div class="file-card">
+                    <h4>Use Plan When:</h4>
+                    <ul style="color: var(--text-secondary); margin-left: 1rem;">
+                        <li>"How should I implement feature X?"</li>
+                        <li>"Design the database schema"</li>
+                        <li>Need architectural decisions</li>
+                        <li>Multiple implementation approaches</li>
+                    </ul>
+                </div>
+                <div class="file-card">
+                    <h4>Use Bash When:</h4>
+                    <ul style="color: var(--text-secondary); margin-left: 1rem;">
+                        <li>Git operations (commit, push)</li>
+                        <li>Running build commands</li>
+                        <li>System administration</li>
+                        <li>Terminal tasks</li>
+                    </ul>
+                </div>
+                <div class="file-card">
+                    <h4>Use General-Purpose When:</h4>
+                    <ul style="color: var(--text-secondary); margin-left: 1rem;">
+                        <li>Complex research</li>
+                        <li>Tasks needing multiple tools</li>
+                        <li>Anything not fitting above</li>
+                        <li>Multi-step investigations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Model Selection</h3>
+
+            <p>Choose the model based on task complexity and cost sensitivity:</p>
+
+            <table>
+                <tr>
+                    <th>Model</th>
+                    <th>Best For</th>
+                    <th>Cost</th>
+                    <th>Speed</th>
+                </tr>
+                <tr>
+                    <td><code>haiku</code></td>
+                    <td>Quick searches, simple tasks</td>
+                    <td>Lowest</td>
+                    <td>Fastest</td>
+                </tr>
+                <tr>
+                    <td><code>sonnet</code></td>
+                    <td>Most coding tasks</td>
+                    <td>Medium</td>
+                    <td>Balanced</td>
+                </tr>
+                <tr>
+                    <td><code>opus</code></td>
+                    <td>Complex reasoning, architecture</td>
+                    <td>Highest</td>
+                    <td>Slower</td>
+                </tr>
+            </table>
+
+            <h3>Background Tasks</h3>
+
+            <p>For long-running tasks, use <code>run_in_background: true</code>:</p>
+
+            <pre><code>// Agent returns immediately with output_file path
+// Check progress with:
+// - Read tool to view the output file
+// - Bash with `tail -f` to follow output
+// - Continue working while agent runs</code></pre>
+
+            <h3>Parallel Execution</h3>
+
+            <p>When tasks are independent, Claude can launch multiple agents simultaneously. Each agent gets its own Task tool call, all run concurrently, and results return as they complete.</p>
+        </section>
+
+        <!-- PLANNING MODE -->
+        <section id="planning">
+            <h2>Planning Mode</h2>
+
+            <p>Planning mode is a structured workflow for complex implementation tasks that require design before coding.</p>
+
+            <h3>When to Use Planning Mode</h3>
+
+            <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1rem;">
+                <li><strong>New feature implementation</strong> - Adding meaningful new functionality</li>
+                <li><strong>Multiple valid approaches</strong> - When the task can be solved several ways</li>
+                <li><strong>Architectural decisions</strong> - Choosing between patterns or technologies</li>
+                <li><strong>Multi-file changes</strong> - Changes affecting more than 2-3 files</li>
+                <li><strong>Unclear requirements</strong> - Need to explore before understanding scope</li>
+            </ul>
+
+            <h3>When NOT to Use Planning Mode</h3>
+
+            <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1rem;">
+                <li>Single-line or few-line fixes</li>
+                <li>Typo corrections</li>
+                <li>Adding a single function with clear requirements</li>
+                <li>Pure research/exploration tasks (use Explore agent instead)</li>
+            </ul>
+
+            <h3>Planning Mode Workflow</h3>
+
+            <div class="flow-diagram">
+1. User requests complex task
+         ↓
+2. Claude uses EnterPlanMode tool
+   (requires user approval)
+         ↓
+3. Claude explores codebase
+   - Glob, Grep, Read tools
+   - Understand existing patterns
+         ↓
+4. Claude writes plan to file
+   - Implementation steps
+   - Files to modify
+   - Trade-offs considered
+         ↓
+5. If clarification needed:
+   → Use AskUserQuestion tool
+         ↓
+6. Claude uses ExitPlanMode
+   - User reviews plan
+   - User approves or requests changes
+         ↓
+7. After approval:
+   - Execute the plan
+   - Write code, tests, docs
+            </div>
+
+            <h3>Interactive Clarification</h3>
+
+            <p>Use the <code>AskUserQuestion</code> tool when you need:</p>
+
+            <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1rem;">
+                <li>User preferences or requirements</li>
+                <li>Clarification on ambiguous instructions</li>
+                <li>Decisions on implementation choices</li>
+                <li>Input on direction to take</li>
+            </ul>
+
+            <div class="tip">
+                <strong>Format:</strong> 1-4 questions per invocation, 2-4 options per question. Users can always select "Other" for custom input.
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills">
+            <h2>Skills System</h2>
+
+            <p>Skills are pre-defined workflows that Claude Code can execute. They automate complex multi-step tasks and enforce consistent quality standards.</p>
+
+            <h3>Skill Architecture</h3>
+
+            <pre><code>.claude/
+└── skills/
+    └── my-skill/
+        └── SKILL.md      # Skill definition</code></pre>
+
+            <h3>SKILL.md Structure</h3>
+
+            <pre><code># Skill Name
+
+**Purpose:** What this skill does
+**Invoke:** /skill-name or describe when auto-invoked
+
+## When to Use
+Trigger conditions
+
+## Blocking Gates
+Conditions that must pass before proceeding
+
+## Steps
+1. First step
+2. Second step
+3. Third step
+
+## Inputs
+- `param1`: Description
+
+## Outputs
+- What the skill produces
+
+## Rollback
+What to do if skill fails
+
+## Example Usage
+/skill-name --param1 value</code></pre>
+
+            <h3>Included Example: /commit</h3>
+
+            <p>The setup script includes a complete commit skill that demonstrates best practices:</p>
+
+            <ol style="color: var(--text-secondary); margin-left: 1.5rem;">
+                <li>Check git status and diff</li>
+                <li>Review recent commit style</li>
+                <li>Stage relevant files (excluding secrets)</li>
+                <li>Generate conventional commits message</li>
+                <li>Create commit with Co-Authored-By footer</li>
+                <li>Verify commit succeeded</li>
+            </ol>
+
+            <h3>Built-in Claude Code Commands</h3>
+
+            <table>
+                <tr><th>Command</th><th>Description</th></tr>
+                <tr><td><code>/help</code></td><td>Show available commands</td></tr>
+                <tr><td><code>/clear</code></td><td>Clear conversation</td></tr>
+                <tr><td><code>/compact</code></td><td>Reduce context size</td></tr>
+                <tr><td><code>/config</code></td><td>View/edit configuration</td></tr>
+                <tr><td><code>/cost</code></td><td>Show token usage</td></tr>
+                <tr><td><code>/doctor</code></td><td>Diagnose issues</td></tr>
+                <tr><td><code>/mcp</code></td><td>MCP server management</td></tr>
+                <tr><td><code>/vim</code></td><td>Toggle vim mode</td></tr>
+            </table>
+        </section>
+
+        <!-- MCP -->
+        <section id="mcp">
+            <h2>Model Context Protocol (MCP)</h2>
+
+            <p>MCP is Anthropic's open standard for connecting AI assistants to external data sources and tools.</p>
+
+            <h3>Architecture</h3>
+
+            <div class="flow-diagram">
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   AI Assistant  │────▶│   MCP Client    │────▶│   MCP Server    │
+│  (Claude Code)  │◀────│   (Built-in)    │◀────│  (Your tools)   │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+                                                        │
+                                                        ▼
+                                               ┌─────────────────┐
+                                               │  External Data  │
+                                               │  - Databases    │
+                                               │  - APIs         │
+                                               │  - Files        │
+                                               └─────────────────┘
+            </div>
+
+            <h3>Common MCP Servers</h3>
+
+            <table>
+                <tr><th>Type</th><th>Package</th><th>Use</th></tr>
+                <tr><td>Filesystem</td><td><code>@modelcontextprotocol/server-filesystem</code></td><td>File access</td></tr>
+                <tr><td>PostgreSQL</td><td><code>@modelcontextprotocol/server-postgres</code></td><td>Database queries</td></tr>
+                <tr><td>Git</td><td><code>@modelcontextprotocol/server-git</code></td><td>Git operations</td></tr>
+                <tr><td>Memory</td><td><code>@modelcontextprotocol/server-memory</code></td><td>Persistent memory</td></tr>
+            </table>
+
+            <h3>Configuration</h3>
+
+            <p>Configure MCP servers in <code>.claude/settings.json</code>:</p>
+
+            <pre><code>{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/allowed/path"
+      ]
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": {
+        "DATABASE_URL": "postgresql://user:pass@host:5432/db"
+      }
+    }
+  }
+}</code></pre>
+
+            <h3>MCP Commands</h3>
+
+            <pre><code>/mcp                    # List configured servers
+/mcp add &lt;server&gt;       # Add a server
+/mcp remove &lt;server&gt;    # Remove a server</code></pre>
+        </section>
+
+        <!-- WORKFLOW -->
+        <section id="workflow">
+            <h2>Development Workflow</h2>
+
+            <h3>The Three Pillars</h3>
+
+            <p>Every production code change MUST include ALL THREE:</p>
+
+            <div class="grid">
+                <div class="file-card">
+                    <h4>1. Tests</h4>
+                    <ul style="color: var(--text-secondary); margin-left: 1rem;">
+                        <li>Write tests WITH implementation</li>
+                        <li>Use pytest for Python</li>
+                        <li>Aim for &gt;80% coverage</li>
+                        <li>Test success AND failure paths</li>
+                        <li>Mock external dependencies</li>
+                    </ul>
+                </div>
+                <div class="file-card">
+                    <h4>2. Documentation</h4>
+                    <ul style="color: var(--text-secondary); margin-left: 1rem;">
+                        <li>Module-level docstrings</li>
+                        <li>Function docstrings (Args, Returns, Raises)</li>
+                        <li>Inline comments for complex logic only</li>
+                    </ul>
+                </div>
+                <div class="file-card">
+                    <h4>3. Git Commits</h4>
+                    <ul style="color: var(--text-secondary); margin-left: 1rem;">
+                        <li>Commit after each logical unit</li>
+                        <li>Use conventional commits format</li>
+                        <li>Include Co-Authored-By footer</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="critical">
+                <strong>NO EXCEPTIONS. NO SHORTCUTS.</strong> Production systems depend on this discipline.
+            </div>
+
+            <h3>Session Protocol</h3>
+
+            <h4>At Start of Session</h4>
+            <ol style="color: var(--text-secondary); margin-left: 1.5rem;">
+                <li>Read <code>PROJECT_STATE.md</code> for current status</li>
+                <li>Read <code>SESSION_LOG.md</code> for recent work and next steps</li>
+                <li>Check <code>git status</code> for uncommitted changes</li>
+                <li>Check for running processes</li>
+            </ol>
+
+            <h4>During Session</h4>
+            <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
+                <li>Use <code>TodoWrite</code> for multi-step tasks</li>
+                <li>Commit work frequently</li>
+                <li>Update documentation as you go</li>
+            </ul>
+
+            <h4>At End of Session</h4>
+            <ol style="color: var(--text-secondary); margin-left: 1.5rem;">
+                <li>Update <code>SESSION_LOG.md</code> with work completed</li>
+                <li>Commit any uncommitted changes</li>
+                <li>Note running background jobs</li>
+                <li>List next steps</li>
+            </ol>
+
+            <h3>Critical Warnings</h3>
+
+            <div class="critical">
+                <h4>Shell Script Line Endings</h4>
+                <p>The Write tool adds Windows-style CRLF line endings that break shell scripts on macOS/Linux.</p>
+                <p><strong>MANDATORY workflow for ALL .sh files:</strong></p>
+                <pre><code># 1. Write the script
+# 2. IMMEDIATELY fix line endings:
+sed -i '' 's/\r$//' script.sh
+# 3. Make executable:
+chmod +x script.sh
+# 4. Test:
+./script.sh</code></pre>
+            </div>
+
+            <div class="critical">
+                <h4>Cloud-First Development</h4>
+                <p>Never hardcode local paths. Code must work in cloud environments.</p>
+                <pre><code># WRONG
+path = '/Users/username/projects/myapp'
+
+# CORRECT
+import os
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+path = os.environ.get('APP_ROOT', '/app')</code></pre>
+            </div>
+        </section>
+
+        <!-- REFERENCE -->
+        <section id="reference">
+            <h2>Quick Reference</h2>
+
+            <h3>Directory Structure</h3>
+
+            <pre><code>MyProject/
+├── CLAUDE.md              # Main session reference (auto-loaded)
+├── PROJECT_STATE.md       # System status
+├── SESSION_LOG.md         # Work tracking
+├── CONTINUATION_GUIDE.md  # Resume commands
+├── agents.md              # Agent instructions
+├── skills.md              # Skills reference
+├── STANDARDS.md           # Protocol reference
+├── src/                   # Source code
+├── tests/                 # Test files
+├── docs/                  # Documentation
+├── scripts/               # Utility scripts
+├── .claude/
+│   ├── settings.json      # MCP configuration
+│   └── skills/            # Custom skills
+│       └── commit/
+│           └── SKILL.md
+└── .github/
+    └── workflows/
+        └── ci.yml         # CI pipeline</code></pre>
+
+            <h3>Common Commands</h3>
+
+            <table>
+                <tr><th>Task</th><th>Command</th></tr>
+                <tr><td>Run tests</td><td><code>pytest -v</code></td></tr>
+                <tr><td>Check coverage</td><td><code>pytest --cov=src</code></td></tr>
+                <tr><td>Git status</td><td><code>git status</code></td></tr>
+                <tr><td>Recent commits</td><td><code>git log --oneline -10</code></td></tr>
+                <tr><td>Check deployments</td><td><code>gh run list --limit 3</code></td></tr>
+            </table>
+
+            <h3>Claude Code Tools</h3>
+
+            <table>
+                <tr><th>Tool</th><th>Purpose</th></tr>
+                <tr><td>Read</td><td>Read files</td></tr>
+                <tr><td>Write</td><td>Create files</td></tr>
+                <tr><td>Edit</td><td>Modify existing files</td></tr>
+                <tr><td>Glob</td><td>Find files by pattern</td></tr>
+                <tr><td>Grep</td><td>Search file contents</td></tr>
+                <tr><td>Bash</td><td>Execute commands</td></tr>
+                <tr><td>Task</td><td>Spawn subagents</td></tr>
+                <tr><td>TodoWrite</td><td>Track tasks</td></tr>
+                <tr><td>AskUserQuestion</td><td>Get user input</td></tr>
+                <tr><td>EnterPlanMode</td><td>Start planning workflow</td></tr>
+                <tr><td>ExitPlanMode</td><td>Submit plan for approval</td></tr>
+                <tr><td>WebFetch</td><td>Fetch web content</td></tr>
+                <tr><td>WebSearch</td><td>Search the web</td></tr>
+            </table>
+
+            <h3>Commit Message Format</h3>
+
+            <pre><code>&lt;type&gt;: &lt;subject&gt;
+
+&lt;body&gt;
+
+Co-Authored-By: Claude &lt;noreply@anthropic.com&gt;</code></pre>
+
+            <p><strong>Types:</strong> feat, fix, docs, refactor, test, chore</p>
+
+            <h3>Resources</h3>
+
+            <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
+                <li><a href="https://docs.anthropic.com/en/docs/claude-code" style="color: var(--accent-secondary);">Claude Code Documentation</a></li>
+                <li><a href="https://spec.modelcontextprotocol.io/" style="color: var(--accent-secondary);">MCP Specification</a></li>
+                <li><a href="https://github.com/modelcontextprotocol/servers" style="color: var(--accent-secondary);">MCP Server Registry</a></li>
+                <li><a href="https://github.com/anthropics/anthropic-cookbook" style="color: var(--accent-secondary);">Anthropic Cookbook</a></li>
+            </ul>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Claude Code Project Setup v2.0 - January 2026</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Created with Claude Code</p>
+    </footer>
+</body>
+</html>
