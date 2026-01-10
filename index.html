@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shelly Palmer's Claude Code Project Setup - Programmer's Guide</title>
-    <meta name="description" content="Comprehensive guide for setting up AI-assisted development projects with Claude Code">
+    <meta name="description"
+        content="Comprehensive guide for setting up AI-assisted development projects with Claude Code">
     <meta name="author" content="Shelly Palmer">
     <style>
         :root {
@@ -112,7 +114,8 @@
             display: block;
         }
 
-        nav a:hover, nav a:focus {
+        nav a:hover,
+        nav a:focus {
             color: var(--accent);
         }
 
@@ -150,7 +153,8 @@
             color: var(--text-secondary);
         }
 
-        ul, ol {
+        ul,
+        ol {
             color: var(--text-secondary);
             margin-left: 1.5rem;
             margin-bottom: 1rem;
@@ -201,7 +205,8 @@
             min-width: 500px;
         }
 
-        th, td {
+        th,
+        td {
             padding: 0.75rem;
             text-align: left;
             border: 1px solid var(--border);
@@ -267,7 +272,9 @@
             color: white;
         }
 
-        .tip, .warning, .critical {
+        .tip,
+        .warning,
+        .critical {
             padding: 1rem;
             margin: 1rem 0;
             border-radius: 0 8px 8px 0;
@@ -321,7 +328,8 @@
         }
 
         /* Touch-friendly tap targets */
-        a, button {
+        a,
+        button {
             min-height: 44px;
             min-width: 44px;
         }
@@ -367,7 +375,8 @@
                 padding: 1.5rem;
             }
 
-            th, td {
+            th,
+            td {
                 padding: 0.8rem 1rem;
             }
         }
@@ -467,7 +476,8 @@
                 font-size: 0.85rem;
             }
 
-            th, td {
+            th,
+            td {
                 padding: 0.5rem 0.6rem;
             }
 
@@ -476,7 +486,9 @@
                 font-size: 0.7rem;
             }
 
-            .tip, .warning, .critical {
+            .tip,
+            .warning,
+            .critical {
                 padding: 0.75rem;
                 font-size: 0.95rem;
             }
@@ -509,12 +521,14 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="author">Shelly Palmer</div>
         <h1>Claude Code Project Setup</h1>
         <div class="version">Version 2.0 - January 2026</div>
         <p class="subtitle">Comprehensive Programmer's Guide for AI-Assisted Development</p>
+        <p><a href="https://shellypalmer.com/ai">shellypalmer.com/ai</a></p>
     </header>
 
     <nav>
@@ -537,7 +551,9 @@
         <section id="overview">
             <h2>Overview</h2>
 
-            <p>The <code>setup-claude-project.sh</code> script creates a complete project structure optimized for development with Claude Code, Anthropic's AI-powered coding assistant. It establishes documentation, configuration, and workflow patterns that enable effective human-AI collaboration.</p>
+            <p>The <code>setup-claude-project.sh</code> script creates a complete project structure optimized for
+                development with Claude Code, Anthropic's AI-powered coding assistant. It establishes documentation,
+                configuration, and workflow patterns that enable effective human-AI collaboration.</p>
 
             <h3>What This Script Does</h3>
             <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1rem;">
@@ -553,7 +569,8 @@
             <div class="grid">
                 <div class="file-card">
                     <h4><span class="badge badge-new">New</span> Subagent Documentation</h4>
-                    <p>Comprehensive guidance on using Explore, Plan, Bash, and general-purpose subagents for different task types.</p>
+                    <p>Comprehensive guidance on using Explore, Plan, Bash, and general-purpose subagents for different
+                        task types.</p>
                 </div>
                 <div class="file-card">
                     <h4><span class="badge badge-new">New</span> Planning Mode</h4>
@@ -594,7 +611,8 @@ claude
 # Claude will automatically load CLAUDE.md and understand your project structure</code></pre>
 
             <div class="tip">
-                <strong>Tip:</strong> Claude Code automatically reads CLAUDE.md at the start of each session. This file contains everything Claude needs to understand your project's conventions, tools, and workflows.
+                <strong>Tip:</strong> Claude Code automatically reads CLAUDE.md at the start of each session. This file
+                contains everything Claude needs to understand your project's conventions, tools, and workflows.
             </div>
         </section>
 
@@ -602,7 +620,8 @@ claude
         <section id="files">
             <h2>Files Created</h2>
 
-            <p>The script creates a comprehensive set of files, each with a specific purpose in the Claude Code workflow.</p>
+            <p>The script creates a comprehensive set of files, each with a specific purpose in the Claude Code
+                workflow.</p>
 
             <h3>Core Documentation Files</h3>
 
@@ -626,12 +645,30 @@ claude
                 <p class="purpose">Current system status snapshot</p>
                 <p>Tracks what's working, what's broken, and what needs attention. Update after completing features.</p>
                 <table>
-                    <tr><th>Section</th><th>Purpose</th></tr>
-                    <tr><td>System Status</td><td>Component-by-component health check</td></tr>
-                    <tr><td>Production State</td><td>Version, environment, URLs</td></tr>
-                    <tr><td>Critical Files</td><td>Files that must not break</td></tr>
-                    <tr><td>Recent Changes</td><td>Changelog summary</td></tr>
-                    <tr><td>Known Issues</td><td>Active bugs or blockers</td></tr>
+                    <tr>
+                        <th>Section</th>
+                        <th>Purpose</th>
+                    </tr>
+                    <tr>
+                        <td>System Status</td>
+                        <td>Component-by-component health check</td>
+                    </tr>
+                    <tr>
+                        <td>Production State</td>
+                        <td>Version, environment, URLs</td>
+                    </tr>
+                    <tr>
+                        <td>Critical Files</td>
+                        <td>Files that must not break</td>
+                    </tr>
+                    <tr>
+                        <td>Recent Changes</td>
+                        <td>Changelog summary</td>
+                    </tr>
+                    <tr>
+                        <td>Known Issues</td>
+                        <td>Active bugs or blockers</td>
+                    </tr>
                 </table>
             </div>
 
@@ -647,7 +684,8 @@ claude
                     <li>Open questions requiring answers</li>
                 </ul>
                 <div class="warning">
-                    <strong>Important:</strong> Always update this file at the end of every session. It's the primary continuity mechanism for multi-session work.
+                    <strong>Important:</strong> Always update this file at the end of every session. It's the primary
+                    continuity mechanism for multi-session work.
                 </div>
             </div>
 
@@ -660,13 +698,15 @@ claude
             <div class="file-card">
                 <h4>agents.md</h4>
                 <p class="purpose">Comprehensive agent instructions</p>
-                <p>Detailed documentation for AI agents including subagent architecture, development environment setup, code conventions, and session protocols.</p>
+                <p>Detailed documentation for AI agents including subagent architecture, development environment setup,
+                    code conventions, and session protocols.</p>
             </div>
 
             <div class="file-card">
                 <h4>skills.md</h4>
                 <p class="purpose">Skills and commands reference</p>
-                <p>Documents available skills (automated workflows), how to create custom skills, and built-in Claude Code commands.</p>
+                <p>Documents available skills (automated workflows), how to create custom skills, and built-in Claude
+                    Code commands.</p>
             </div>
 
             <div class="file-card">
@@ -693,7 +733,8 @@ claude
             <div class="file-card">
                 <h4>.claude/skills/commit/SKILL.md</h4>
                 <p class="purpose">Example skill definition</p>
-                <p>A working example of a commit skill that demonstrates skill structure, blocking gates, and execution steps.</p>
+                <p>A working example of a commit skill that demonstrates skill structure, blocking gates, and execution
+                    steps.</p>
             </div>
 
             <div class="file-card">
@@ -707,7 +748,8 @@ claude
         <section id="subagents">
             <h2>Subagent System</h2>
 
-            <p>Claude Code uses specialized subagents for different tasks. Each subagent has specific capabilities and tools available to it.</p>
+            <p>Claude Code uses specialized subagents for different tasks. Each subagent has specific capabilities and
+                tools available to it.</p>
 
             <h3>Available Subagents</h3>
 
@@ -828,14 +870,16 @@ claude
 
             <h3>Parallel Execution</h3>
 
-            <p>When tasks are independent, Claude can launch multiple agents simultaneously. Each agent gets its own Task tool call, all run concurrently, and results return as they complete.</p>
+            <p>When tasks are independent, Claude can launch multiple agents simultaneously. Each agent gets its own
+                Task tool call, all run concurrently, and results return as they complete.</p>
         </section>
 
         <!-- PLANNING MODE -->
         <section id="planning">
             <h2>Planning Mode</h2>
 
-            <p>Planning mode is a structured workflow for complex implementation tasks that require design before coding.</p>
+            <p>Planning mode is a structured workflow for complex implementation tasks that require design before
+                coding.</p>
 
             <h3>When to Use Planning Mode</h3>
 
@@ -859,30 +903,30 @@ claude
             <h3>Planning Mode Workflow</h3>
 
             <div class="flow-diagram">
-1. User requests complex task
-         ↓
-2. Claude uses EnterPlanMode tool
-   (requires user approval)
-         ↓
-3. Claude explores codebase
-   - Glob, Grep, Read tools
-   - Understand existing patterns
-         ↓
-4. Claude writes plan to file
-   - Implementation steps
-   - Files to modify
-   - Trade-offs considered
-         ↓
-5. If clarification needed:
-   → Use AskUserQuestion tool
-         ↓
-6. Claude uses ExitPlanMode
-   - User reviews plan
-   - User approves or requests changes
-         ↓
-7. After approval:
-   - Execute the plan
-   - Write code, tests, docs
+                1. User requests complex task
+                ↓
+                2. Claude uses EnterPlanMode tool
+                (requires user approval)
+                ↓
+                3. Claude explores codebase
+                - Glob, Grep, Read tools
+                - Understand existing patterns
+                ↓
+                4. Claude writes plan to file
+                - Implementation steps
+                - Files to modify
+                - Trade-offs considered
+                ↓
+                5. If clarification needed:
+                → Use AskUserQuestion tool
+                ↓
+                6. Claude uses ExitPlanMode
+                - User reviews plan
+                - User approves or requests changes
+                ↓
+                7. After approval:
+                - Execute the plan
+                - Write code, tests, docs
             </div>
 
             <h3>Interactive Clarification</h3>
@@ -897,7 +941,8 @@ claude
             </ul>
 
             <div class="tip">
-                <strong>Format:</strong> 1-4 questions per invocation, 2-4 options per question. Users can always select "Other" for custom input.
+                <strong>Format:</strong> 1-4 questions per invocation, 2-4 options per question. Users can always select
+                "Other" for custom input.
             </div>
         </section>
 
@@ -905,7 +950,8 @@ claude
         <section id="skills">
             <h2>Skills System</h2>
 
-            <p>Skills are pre-defined workflows that Claude Code can execute. They automate complex multi-step tasks and enforce consistent quality standards.</p>
+            <p>Skills are pre-defined workflows that Claude Code can execute. They automate complex multi-step tasks and
+                enforce consistent quality standards.</p>
 
             <h3>Skill Architecture</h3>
 
@@ -960,15 +1006,42 @@ What to do if skill fails
             <h3>Built-in Claude Code Commands</h3>
 
             <table>
-                <tr><th>Command</th><th>Description</th></tr>
-                <tr><td><code>/help</code></td><td>Show available commands</td></tr>
-                <tr><td><code>/clear</code></td><td>Clear conversation</td></tr>
-                <tr><td><code>/compact</code></td><td>Reduce context size</td></tr>
-                <tr><td><code>/config</code></td><td>View/edit configuration</td></tr>
-                <tr><td><code>/cost</code></td><td>Show token usage</td></tr>
-                <tr><td><code>/doctor</code></td><td>Diagnose issues</td></tr>
-                <tr><td><code>/mcp</code></td><td>MCP server management</td></tr>
-                <tr><td><code>/vim</code></td><td>Toggle vim mode</td></tr>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>/help</code></td>
+                    <td>Show available commands</td>
+                </tr>
+                <tr>
+                    <td><code>/clear</code></td>
+                    <td>Clear conversation</td>
+                </tr>
+                <tr>
+                    <td><code>/compact</code></td>
+                    <td>Reduce context size</td>
+                </tr>
+                <tr>
+                    <td><code>/config</code></td>
+                    <td>View/edit configuration</td>
+                </tr>
+                <tr>
+                    <td><code>/cost</code></td>
+                    <td>Show token usage</td>
+                </tr>
+                <tr>
+                    <td><code>/doctor</code></td>
+                    <td>Diagnose issues</td>
+                </tr>
+                <tr>
+                    <td><code>/mcp</code></td>
+                    <td>MCP server management</td>
+                </tr>
+                <tr>
+                    <td><code>/vim</code></td>
+                    <td>Toggle vim mode</td>
+                </tr>
             </table>
         </section>
 
@@ -981,28 +1054,48 @@ What to do if skill fails
             <h3>Architecture</h3>
 
             <div class="flow-diagram">
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│   AI Assistant  │────▶│   MCP Client    │────▶│   MCP Server    │
-│  (Claude Code)  │◀────│   (Built-in)    │◀────│  (Your tools)   │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
-                                                        │
-                                                        ▼
-                                               ┌─────────────────┐
-                                               │  External Data  │
-                                               │  - Databases    │
-                                               │  - APIs         │
-                                               │  - Files        │
-                                               └─────────────────┘
+                ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
+                │ AI Assistant │────▶│ MCP Client │────▶│ MCP Server │
+                │ (Claude Code) │◀────│ (Built-in) │◀────│ (Your tools) │
+                └─────────────────┘ └─────────────────┘ └─────────────────┘
+                │
+                ▼
+                ┌─────────────────┐
+                │ External Data │
+                │ - Databases │
+                │ - APIs │
+                │ - Files │
+                └─────────────────┘
             </div>
 
             <h3>Common MCP Servers</h3>
 
             <table>
-                <tr><th>Type</th><th>Package</th><th>Use</th></tr>
-                <tr><td>Filesystem</td><td><code>@modelcontextprotocol/server-filesystem</code></td><td>File access</td></tr>
-                <tr><td>PostgreSQL</td><td><code>@modelcontextprotocol/server-postgres</code></td><td>Database queries</td></tr>
-                <tr><td>Git</td><td><code>@modelcontextprotocol/server-git</code></td><td>Git operations</td></tr>
-                <tr><td>Memory</td><td><code>@modelcontextprotocol/server-memory</code></td><td>Persistent memory</td></tr>
+                <tr>
+                    <th>Type</th>
+                    <th>Package</th>
+                    <th>Use</th>
+                </tr>
+                <tr>
+                    <td>Filesystem</td>
+                    <td><code>@modelcontextprotocol/server-filesystem</code></td>
+                    <td>File access</td>
+                </tr>
+                <tr>
+                    <td>PostgreSQL</td>
+                    <td><code>@modelcontextprotocol/server-postgres</code></td>
+                    <td>Database queries</td>
+                </tr>
+                <tr>
+                    <td>Git</td>
+                    <td><code>@modelcontextprotocol/server-git</code></td>
+                    <td>Git operations</td>
+                </tr>
+                <tr>
+                    <td>Memory</td>
+                    <td><code>@modelcontextprotocol/server-memory</code></td>
+                    <td>Persistent memory</td>
+                </tr>
             </table>
 
             <h3>Configuration</h3>
@@ -1160,31 +1253,91 @@ path = os.environ.get('APP_ROOT', '/app')</code></pre>
             <h3>Common Commands</h3>
 
             <table>
-                <tr><th>Task</th><th>Command</th></tr>
-                <tr><td>Run tests</td><td><code>pytest -v</code></td></tr>
-                <tr><td>Check coverage</td><td><code>pytest --cov=src</code></td></tr>
-                <tr><td>Git status</td><td><code>git status</code></td></tr>
-                <tr><td>Recent commits</td><td><code>git log --oneline -10</code></td></tr>
-                <tr><td>Check deployments</td><td><code>gh run list --limit 3</code></td></tr>
+                <tr>
+                    <th>Task</th>
+                    <th>Command</th>
+                </tr>
+                <tr>
+                    <td>Run tests</td>
+                    <td><code>pytest -v</code></td>
+                </tr>
+                <tr>
+                    <td>Check coverage</td>
+                    <td><code>pytest --cov=src</code></td>
+                </tr>
+                <tr>
+                    <td>Git status</td>
+                    <td><code>git status</code></td>
+                </tr>
+                <tr>
+                    <td>Recent commits</td>
+                    <td><code>git log --oneline -10</code></td>
+                </tr>
+                <tr>
+                    <td>Check deployments</td>
+                    <td><code>gh run list --limit 3</code></td>
+                </tr>
             </table>
 
             <h3>Claude Code Tools</h3>
 
             <table>
-                <tr><th>Tool</th><th>Purpose</th></tr>
-                <tr><td>Read</td><td>Read files</td></tr>
-                <tr><td>Write</td><td>Create files</td></tr>
-                <tr><td>Edit</td><td>Modify existing files</td></tr>
-                <tr><td>Glob</td><td>Find files by pattern</td></tr>
-                <tr><td>Grep</td><td>Search file contents</td></tr>
-                <tr><td>Bash</td><td>Execute commands</td></tr>
-                <tr><td>Task</td><td>Spawn subagents</td></tr>
-                <tr><td>TodoWrite</td><td>Track tasks</td></tr>
-                <tr><td>AskUserQuestion</td><td>Get user input</td></tr>
-                <tr><td>EnterPlanMode</td><td>Start planning workflow</td></tr>
-                <tr><td>ExitPlanMode</td><td>Submit plan for approval</td></tr>
-                <tr><td>WebFetch</td><td>Fetch web content</td></tr>
-                <tr><td>WebSearch</td><td>Search the web</td></tr>
+                <tr>
+                    <th>Tool</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>Read</td>
+                    <td>Read files</td>
+                </tr>
+                <tr>
+                    <td>Write</td>
+                    <td>Create files</td>
+                </tr>
+                <tr>
+                    <td>Edit</td>
+                    <td>Modify existing files</td>
+                </tr>
+                <tr>
+                    <td>Glob</td>
+                    <td>Find files by pattern</td>
+                </tr>
+                <tr>
+                    <td>Grep</td>
+                    <td>Search file contents</td>
+                </tr>
+                <tr>
+                    <td>Bash</td>
+                    <td>Execute commands</td>
+                </tr>
+                <tr>
+                    <td>Task</td>
+                    <td>Spawn subagents</td>
+                </tr>
+                <tr>
+                    <td>TodoWrite</td>
+                    <td>Track tasks</td>
+                </tr>
+                <tr>
+                    <td>AskUserQuestion</td>
+                    <td>Get user input</td>
+                </tr>
+                <tr>
+                    <td>EnterPlanMode</td>
+                    <td>Start planning workflow</td>
+                </tr>
+                <tr>
+                    <td>ExitPlanMode</td>
+                    <td>Submit plan for approval</td>
+                </tr>
+                <tr>
+                    <td>WebFetch</td>
+                    <td>Fetch web content</td>
+                </tr>
+                <tr>
+                    <td>WebSearch</td>
+                    <td>Search the web</td>
+                </tr>
             </table>
 
             <h3>Commit Message Format</h3>
@@ -1200,10 +1353,14 @@ Co-Authored-By: Claude &lt;noreply@anthropic.com&gt;</code></pre>
             <h3>Resources</h3>
 
             <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
-                <li><a href="https://docs.anthropic.com/en/docs/claude-code" style="color: var(--accent-secondary);">Claude Code Documentation</a></li>
-                <li><a href="https://spec.modelcontextprotocol.io/" style="color: var(--accent-secondary);">MCP Specification</a></li>
-                <li><a href="https://github.com/modelcontextprotocol/servers" style="color: var(--accent-secondary);">MCP Server Registry</a></li>
-                <li><a href="https://github.com/anthropics/anthropic-cookbook" style="color: var(--accent-secondary);">Anthropic Cookbook</a></li>
+                <li><a href="https://docs.anthropic.com/en/docs/claude-code"
+                        style="color: var(--accent-secondary);">Claude Code Documentation</a></li>
+                <li><a href="https://spec.modelcontextprotocol.io/" style="color: var(--accent-secondary);">MCP
+                        Specification</a></li>
+                <li><a href="https://github.com/modelcontextprotocol/servers"
+                        style="color: var(--accent-secondary);">MCP Server Registry</a></li>
+                <li><a href="https://github.com/anthropics/anthropic-cookbook"
+                        style="color: var(--accent-secondary);">Anthropic Cookbook</a></li>
             </ul>
         </section>
 
@@ -1214,4 +1371,5 @@ Co-Authored-By: Claude &lt;noreply@anthropic.com&gt;</code></pre>
         <p style="margin-top: 0.5rem; font-size: 0.9rem;">Created with Claude Code</p>
     </footer>
 </body>
+
 </html>
