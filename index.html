@@ -91,8 +91,52 @@
             top: 0;
             z-index: 100;
             border-bottom: 1px solid var(--border);
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Hamburger button - hidden on desktop */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            position: absolute;
+            right: 0;
+            z-index: 110;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
         }
 
         nav ul {
@@ -101,7 +145,6 @@
             flex-wrap: nowrap;
             gap: 1.5rem;
             justify-content: center;
-            min-width: max-content;
         }
 
         nav a {
@@ -117,6 +160,22 @@
         nav a:hover,
         nav a:focus {
             color: var(--accent);
+        }
+
+        /* Mobile menu overlay */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 90;
+        }
+
+        .nav-overlay.active {
+            display: block;
         }
 
         section {
@@ -389,6 +448,67 @@
         }
 
         /* Mobile specific */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav {
+                padding: 0.75rem 1rem;
+            }
+
+            .nav-container {
+                justify-content: flex-start;
+            }
+
+            .nav-container::before {
+                content: 'Menu';
+                color: var(--text-secondary);
+                font-weight: 500;
+                font-size: 0.9rem;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -280px;
+                width: 280px;
+                height: 100vh;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 5rem 2rem 2rem;
+                gap: 0;
+                margin: 0;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+                transition: right 0.3s ease;
+                z-index: 100;
+                overflow-y: auto;
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav ul li {
+                border-bottom: 1px solid var(--border);
+            }
+
+            nav ul li:last-child {
+                border-bottom: none;
+            }
+
+            nav a {
+                padding: 1rem 0;
+                font-size: 1.1rem;
+            }
+
+            nav a:hover,
+            nav a:focus {
+                color: var(--accent);
+                padding-left: 0.5rem;
+            }
+        }
+
         @media (max-width: 599px) {
             .container {
                 padding: 0.75rem;
@@ -414,20 +534,6 @@
 
             header .subtitle {
                 font-size: 0.95rem;
-            }
-
-            nav {
-                padding: 0.75rem 1rem;
-            }
-
-            nav ul {
-                justify-content: flex-start;
-                gap: 1rem;
-                padding: 0 0.5rem;
-            }
-
-            nav a {
-                font-size: 0.9rem;
             }
 
             section {
@@ -532,17 +638,25 @@
     </header>
 
     <nav>
-        <ul>
-            <li><a href="#overview">Overview</a></li>
-            <li><a href="#quickstart">Quick Start</a></li>
-            <li><a href="#files">Files Created</a></li>
-            <li><a href="#subagents">Subagents</a></li>
-            <li><a href="#planning">Planning Mode</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#mcp">MCP</a></li>
-            <li><a href="#workflow">Workflow</a></li>
-            <li><a href="#reference">Reference</a></li>
-        </ul>
+        <div class="nav-container">
+            <ul id="navMenu">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#quickstart">Quick Start</a></li>
+                <li><a href="#files">Files Created</a></li>
+                <li><a href="#subagents">Subagents</a></li>
+                <li><a href="#planning">Planning Mode</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#mcp">MCP</a></li>
+                <li><a href="#workflow">Workflow</a></li>
+                <li><a href="#reference">Reference</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="nav-overlay" id="navOverlay"></div>
     </nav>
 
     <div class="container">
@@ -1370,6 +1484,54 @@ Co-Authored-By: Claude &lt;noreply@anthropic.com&gt;</code></pre>
         <p>Claude Code Project Setup v2.0 - January 2026</p>
         <p style="margin-top: 0.5rem; font-size: 0.9rem;">Created with Claude Code</p>
     </footer>
+
+    <script>
+        // Mobile navigation toggle
+        (function() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            const navOverlay = document.getElementById('navOverlay');
+            const navLinks = navMenu.querySelectorAll('a');
+
+            function toggleMenu() {
+                const isOpen = navMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+                navOverlay.classList.toggle('active');
+                hamburger.setAttribute('aria-expanded', isOpen);
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+            }
+
+            function closeMenu() {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                navOverlay.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+
+            hamburger.addEventListener('click', toggleMenu);
+            navOverlay.addEventListener('click', closeMenu);
+
+            // Close menu when a link is clicked
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', closeMenu);
+            });
+
+            // Close menu on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                    closeMenu();
+                }
+            });
+
+            // Close menu on window resize to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+                    closeMenu();
+                }
+            });
+        })();
+    </script>
 </body>
 
 </html>
