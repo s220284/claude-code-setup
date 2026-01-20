@@ -1,6 +1,6 @@
 # Shelly Palmer's Claude Code Project Setup
 
-A comprehensive setup script and programmer's guide for AI-assisted development with [Claude Code](https://claude.ai/claude-code).
+A streamlined setup script and programmer's guide for AI-assisted development with [Claude Code](https://claude.ai/claude-code).
 
 ## What's Included
 
@@ -24,21 +24,18 @@ chmod +x setup-claude-project.sh
 
 ## What the Script Creates
 
-The setup script generates a complete Claude Code project structure:
+The setup script generates a streamlined Claude Code project structure:
 
 ```
 your-project/
 ├── CLAUDE.md              # Main instructions file (auto-loaded by Claude)
 ├── PROJECT_STATE.md       # System status tracker
 ├── SESSION_LOG.md         # Work history and continuity
+├── CONTINUATION_GUIDE.md  # Quick-start commands
 ├── .claude/
 │   ├── settings.json      # Claude Code configuration
 │   └── skills/
-│       └── commit/        # Example skill for git commits
-├── docs/
-│   ├── agents.md          # Subagent documentation
-│   ├── skills.md          # Skills system guide
-│   └── STANDARDS.md       # Code quality standards
+│       └── commit/        # Commit workflow skill
 └── .github/
     └── workflows/
         └── ci.yml         # GitHub Actions workflow
@@ -46,12 +43,21 @@ your-project/
 
 ## Key Features
 
-- **Subagent Documentation**: How to use Explore, Plan, Bash, and general-purpose agents
-- **Planning Mode Workflow**: When and how to use EnterPlanMode/ExitPlanMode
-- **Skills System**: Creating custom slash commands
-- **MCP Integration**: Model Context Protocol server configuration
-- **Cloud-First Patterns**: Best practices for cloud deployment
+- **Simplified Documentation**: v3.0 removes redundant files (agents.md, skills.md, STANDARDS.md) since Claude Code has built-in knowledge
+- **Global Plugins**: Documents available plugins like feature-dev, pr-review-toolkit, frontend-design, and ralph-loop
 - **Session Continuity**: Documentation structure for multi-session work
+- **Cloud-First Patterns**: Best practices for cloud deployment
+- **Skill Shortcuts**: Quick reference table for common workflows
+- **MCP Integration**: Model Context Protocol server configuration
+
+## Version 3.0 Improvements
+
+v3.0 is a streamlined evolution that recognizes Claude Code's built-in capabilities:
+
+- **Removed Redundancy**: No more agents.md, skills.md, or STANDARDS.md files
+- **Focused CLAUDE.md**: Contains only project-specific guidance, not general Claude Code documentation
+- **Plugin Documentation**: Global plugins (feature-dev, pr-review-toolkit, etc.) documented directly in CLAUDE.md
+- **Cleaner Structure**: Fewer files, same power
 
 ## Programmer's Guide
 
@@ -60,8 +66,7 @@ The full documentation is available at: **[s220284.github.io/claude-code-setup](
 The guide covers:
 - Complete script walkthrough
 - Each generated file explained
-- Subagent selection guidance
-- Model selection (Haiku vs Sonnet vs Opus)
+- Global plugins and skills reference
 - Planning mode best practices
 - Real-world usage examples
 
@@ -89,4 +94,4 @@ MIT License - Use freely, attribution appreciated.
 
 ---
 
-*Version 2.0 - January 2026*
+*Version 3.0 - January 2026*
