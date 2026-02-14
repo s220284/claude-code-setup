@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shelly Palmer's Claude Code Project Setup - Programmer's Guide v3.0</title>
+    <title>Shelly Palmer's Claude Code Project Setup - Programmer's Guide v4.0</title>
     <meta name="description"
-        content="Streamlined guide for AI-assisted development with Claude Code - Version 3.0">
+        content="Comprehensive guide for AI-assisted development with Claude Code - Version 4.0 with hooks, modular rules, and auto-memory">
     <meta name="author" content="Shelly Palmer">
     <style>
         :root {
@@ -319,6 +319,11 @@
             color: white;
         }
 
+        .badge-removed {
+            background: #ff4444;
+            color: white;
+        }
+
         .callout {
             padding: 1rem 1.25rem;
             margin: 1.5rem 0;
@@ -451,9 +456,9 @@
 <body>
     <header>
         <div class="container">
-            <div class="version-badge">Version 3.0</div>
+            <div class="version-badge">Version 4.0</div>
             <h1>Claude Code Project Setup</h1>
-            <p class="subtitle">Streamlined Programmer's Guide for AI-Assisted Development</p>
+            <p class="subtitle">Programmer's Guide for AI-Assisted Development</p>
             <p class="author">by <a href="https://shellypalmer.com/ai" target="_blank">Shelly Palmer</a></p>
         </div>
     </header>
@@ -465,6 +470,8 @@
                 <li><a href="#quickstart">Quick Start</a></li>
                 <li><a href="#whats-new">What's New</a></li>
                 <li><a href="#files">Files</a></li>
+                <li><a href="#hooks">Hooks</a></li>
+                <li><a href="#rules">Rules</a></li>
                 <li><a href="#plugins">Plugins</a></li>
                 <li><a href="#workflow">Workflow</a></li>
                 <li><a href="#reference">Reference</a></li>
@@ -484,24 +491,25 @@
         <section id="overview">
             <h2>Overview</h2>
 
-            <p>The <code>setup-claude-project.sh</code> script creates an optimized project structure for development
-                with Claude Code. Version 3.0 is a streamlined evolution that removes redundancy while maintaining
-                all the power of previous versions.</p>
+            <p>The <code>setup-claude-project.sh</code> script creates an optimized, language-agnostic project structure
+                for development with Claude Code. Version 4.0 takes advantage of mature Claude Code features: hooks,
+                modular rules, path-specific loading, auto-memory, and agent teams.</p>
 
             <h3>What This Script Does</h3>
             <ul>
-                <li>Creates standardized project documentation</li>
-                <li>Sets up session continuity files for multi-session work</li>
-                <li>Configures MCP (Model Context Protocol) infrastructure</li>
-                <li>Establishes skill definitions for automated workflows</li>
-                <li>Creates CI/CD pipeline templates</li>
+                <li>Creates a slim, focused CLAUDE.md (~80 lines of project-specific guidance)</li>
+                <li>Scaffolds hooks for shell script fixing and notification alerts</li>
+                <li>Sets up modular rules with path-specific frontmatter</li>
+                <li>Configures permissions and deny rules in settings.json</li>
+                <li>Creates skill definitions with YAML frontmatter</li>
+                <li>Provides a language-agnostic CI/CD pipeline template</li>
                 <li>Initializes git repository with comprehensive commit</li>
             </ul>
 
             <div class="callout callout-success">
-                <strong>Philosophy:</strong> v3.0 recognizes that Claude Code has built-in knowledge of subagents,
-                MCP, and protocols. Your project files should contain only project-specific guidance, not general
-                documentation.
+                <strong>Philosophy:</strong> v4.0 embraces Claude Code's mature feature set. Hooks replace manual
+                warnings, modular rules replace monolithic docs, auto-memory replaces session logs, and agent teams
+                replace loop plugins. Your CLAUDE.md stays lean and project-specific.
             </div>
         </section>
 
@@ -526,72 +534,96 @@ chmod +x setup-claude-project.sh
             <pre><code># Navigate to your project
 cd MyProject
 
-# Start Claude Code
-claude
+# Customize rules for your language
+edit .claude/rules/code-style.md
+edit .claude/rules/testing.md
 
-# Claude automatically loads CLAUDE.md at session start</code></pre>
+# Let Claude analyze your codebase
+claude
+> /init
+
+# Claude automatically loads CLAUDE.md and rules at session start</code></pre>
 
             <div class="callout callout-info">
-                <strong>Pro Tip:</strong> Claude Code reads CLAUDE.md automatically. This file contains everything
-                Claude needs to understand your project's conventions, tools, and workflows.
+                <strong>Pro Tip:</strong> Run <code>/init</code> after setup to let Claude analyze your codebase and
+                generate additional project-specific instructions that complement the scaffolded rules.
             </div>
         </section>
 
         <!-- WHAT'S NEW -->
         <section id="whats-new">
-            <h2>What's New in v3.0</h2>
+            <h2>What's New in v4.0</h2>
 
             <div class="grid">
                 <div class="card">
-                    <h4><span class="badge badge-new">New</span> Simplified Structure</h4>
-                    <p>Removed redundant files: agents.md, skills.md, STANDARDS.md. Claude Code has built-in
-                        knowledge of these systems.</p>
+                    <h4><span class="badge badge-new">New</span> Hooks System</h4>
+                    <p>Scaffolded PostToolUse hook auto-fixes shell script line endings and permissions. Notification
+                        hook sends macOS alerts when Claude needs attention.</p>
                 </div>
                 <div class="card">
-                    <h4><span class="badge badge-new">New</span> Focused CLAUDE.md</h4>
-                    <p>Contains only project-specific guidance. No more duplicating Claude Code documentation in
-                        every project.</p>
+                    <h4><span class="badge badge-new">New</span> Modular Rules</h4>
+                    <p><code>.claude/rules/</code> directory with path-specific YAML frontmatter. Rules load
+                        automatically when working in matching directories.</p>
                 </div>
                 <div class="card">
-                    <h4><span class="badge badge-new">New</span> Global Plugins</h4>
-                    <p>Documents available global plugins: feature-dev, pr-review-toolkit, frontend-design,
-                        ralph-loop.</p>
+                    <h4><span class="badge badge-new">New</span> Auto-Memory</h4>
+                    <p>Claude Code's built-in memory handles session continuity. SESSION_LOG.md and CONTINUATION_GUIDE.md
+                        are no longer needed.</p>
                 </div>
                 <div class="card">
-                    <h4><span class="badge badge-new">New</span> Skill Shortcuts</h4>
-                    <p>Quick reference table in CLAUDE.md for common workflow commands.</p>
+                    <h4><span class="badge badge-new">New</span> Agent Teams</h4>
+                    <p>Agent teams (experimental) are the new direction for multi-agent workflows, replacing loop-based
+                        plugins like ralph-loop.</p>
+                </div>
+                <div class="card">
+                    <h4><span class="badge badge-new">New</span> Language-Agnostic</h4>
+                    <p>All Python-specific references removed. Generic placeholders work with any tech stack &mdash;
+                        customize for your language.</p>
+                </div>
+                <div class="card">
+                    <h4><span class="badge badge-new">New</span> Skill Frontmatter</h4>
+                    <p>Skills now use YAML frontmatter (<code>name</code>, <code>description</code>,
+                        <code>user-invocable</code>) for proper registration with Claude Code.</p>
                 </div>
             </div>
 
-            <h3>Files Removed in v3.0</h3>
+            <h3>Files Changed in v4.0</h3>
             <div class="table-wrapper">
                 <table>
                     <tr>
-                        <th>File</th>
-                        <th>Why Removed</th>
-                        <th>Replacement</th>
+                        <th>Change</th>
+                        <th>Details</th>
                     </tr>
                     <tr>
-                        <td>agents.md</td>
-                        <td>Claude Code has built-in subagent knowledge</td>
-                        <td>Use Claude Code's native capabilities</td>
+                        <td><span class="badge badge-removed">Removed</span> SESSION_LOG.md</td>
+                        <td>Auto-memory handles session continuity</td>
                     </tr>
                     <tr>
-                        <td>skills.md</td>
-                        <td>General skills documentation not project-specific</td>
-                        <td>Skills table in CLAUDE.md for project skills</td>
+                        <td><span class="badge badge-removed">Removed</span> CONTINUATION_GUIDE.md</td>
+                        <td>Generic content Claude already knows</td>
                     </tr>
                     <tr>
-                        <td>STANDARDS.md</td>
-                        <td>MCP and protocol docs available online</td>
-                        <td>Link to official docs as needed</td>
+                        <td><span class="badge badge-removed">Removed</span> ralph-loop plugin</td>
+                        <td>Agent teams are the new direction</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-new">Added</span> .claude/rules/</td>
+                        <td>Modular, path-specific rule files</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-new">Added</span> .claude/settings.local.json</td>
+                        <td>Personal overrides, gitignored</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-new">Added</span> Hooks in settings.json</td>
+                        <td>PostToolUse shell fixer, Notification alerts</td>
                     </tr>
                 </table>
             </div>
 
             <div class="callout callout-success">
-                <strong>Result:</strong> Fewer files, cleaner structure, same powerful capabilities. Your project
-                documentation stays focused on what makes your project unique.
+                <strong>Result:</strong> Leaner project scaffold that leverages Claude Code's mature features. CLAUDE.md
+                is under 100 lines, focused entirely on project-specific guidance.
             </div>
         </section>
 
@@ -599,21 +631,21 @@ claude
         <section id="files">
             <h2>Files Created</h2>
 
-            <p>v3.0 creates a streamlined set of files, each with a clear purpose:</p>
+            <p>v4.0 creates a focused set of files, each with a clear purpose:</p>
 
             <h3>Core Documentation</h3>
 
             <div class="card">
                 <h4>CLAUDE.md <span class="badge badge-required">Required</span></h4>
-                <p><strong>Purpose:</strong> Main session reference - auto-loaded by Claude Code</p>
-                <p>Contains:</p>
+                <p><strong>Purpose:</strong> Main session reference &mdash; auto-loaded by Claude Code</p>
+                <p>Contains (~80 lines):</p>
                 <ul>
-                    <li>Critical warnings (shell line endings, cloud-first development)</li>
-                    <li>Engineering requirements (tests, docs, commits)</li>
-                    <li>Session continuity protocol</li>
-                    <li>Code conventions</li>
-                    <li>Available skills & plugins table</li>
-                    <li>Quick commands reference</li>
+                    <li>Cloud-first development warning</li>
+                    <li>Engineering requirements (Three Pillars)</li>
+                    <li>Modular documentation references (<code>@import</code> syntax)</li>
+                    <li>Session continuity with auto-memory note</li>
+                    <li>Project structure diagram</li>
+                    <li>Available skills &amp; plugins table</li>
                 </ul>
             </div>
 
@@ -624,44 +656,220 @@ claude
                     Update after completing features.</p>
             </div>
 
-            <div class="card">
-                <h4>SESSION_LOG.md <span class="badge badge-required">Required</span></h4>
-                <p><strong>Purpose:</strong> Append-only work history</p>
-                <p>Each session adds an entry documenting work completed, files modified, decisions made, and next
-                    steps. Primary continuity mechanism for multi-session work.</p>
-            </div>
-
-            <div class="card">
-                <h4>CONTINUATION_GUIDE.md</h4>
-                <p><strong>Purpose:</strong> Quick-start commands for resuming work</p>
-                <p>Contains copy-paste commands for common tasks when returning to the project.</p>
-            </div>
-
             <h3>Configuration</h3>
 
             <div class="card">
                 <h4>.claude/settings.json</h4>
-                <p><strong>Purpose:</strong> MCP server and permissions configuration</p>
+                <p><strong>Purpose:</strong> Shared project configuration &mdash; permissions, hooks, and MCP servers</p>
                 <pre><code>{
-  "mcpServers": {},
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
-    "allow": [],
-    "deny": []
+    "allow": ["Bash(git status)", "Bash(git diff *)", "Bash(git log *)"],
+    "deny": ["Read(.env)", "Read(.env.*)"]
   },
-  "hooks": {}
+  "hooks": {
+    "PostToolUse": [{ "matcher": "Write", "hooks": [{ "type": "command", "command": "..." }] }],
+    "Notification": [{ "matcher": "", "hooks": [{ "type": "command", "command": "..." }] }]
+  }
 }</code></pre>
             </div>
 
             <div class="card">
-                <h4>.claude/skills/commit/SKILL.md</h4>
-                <p><strong>Purpose:</strong> Example skill definition</p>
-                <p>A working example demonstrating skill structure, blocking gates, and execution steps.</p>
+                <h4>.claude/settings.local.json <span class="badge badge-new">New</span></h4>
+                <p><strong>Purpose:</strong> Personal overrides (gitignored)</p>
+                <p>Add your own permissions, MCP servers, or hook overrides without affecting the shared configuration.</p>
+            </div>
+
+            <h3>Rules</h3>
+
+            <div class="card">
+                <h4>.claude/rules/code-style.md <span class="badge badge-new">New</span></h4>
+                <p><strong>Purpose:</strong> Code conventions scoped to <code>src/**</code></p>
+                <p>Uses <code>paths:</code> YAML frontmatter so rules only load when working on source files.</p>
             </div>
 
             <div class="card">
+                <h4>.claude/rules/testing.md <span class="badge badge-new">New</span></h4>
+                <p><strong>Purpose:</strong> Testing standards scoped to <code>tests/**</code></p>
+                <p>Uses <code>paths:</code> YAML frontmatter so rules only load when working on test files.</p>
+            </div>
+
+            <h3>Skills</h3>
+
+            <div class="card">
+                <h4>.claude/skills/commit/SKILL.md</h4>
+                <p><strong>Purpose:</strong> Commit workflow skill with YAML frontmatter</p>
+                <p>Now includes <code>name</code>, <code>description</code>, and <code>user-invocable: true</code>
+                    frontmatter for proper skill registration.</p>
+            </div>
+
+            <h3>CI/CD</h3>
+
+            <div class="card">
                 <h4>.github/workflows/ci.yml</h4>
-                <p><strong>Purpose:</strong> CI/CD pipeline template</p>
-                <p>GitHub Actions workflow for running tests on push and pull requests.</p>
+                <p><strong>Purpose:</strong> Language-agnostic CI pipeline template</p>
+                <p>Contains TODO placeholders for your language-specific setup, install, and test commands.</p>
+            </div>
+        </section>
+
+        <!-- HOOKS -->
+        <section id="hooks">
+            <h2>Hooks</h2>
+
+            <p>Claude Code's hook system lets you run commands automatically in response to events. Hooks are configured
+                in <code>.claude/settings.json</code> and execute shell commands when triggered.</p>
+
+            <h3>How Hooks Work</h3>
+
+            <p>Hooks fire on specific events during a Claude Code session:</p>
+
+            <div class="table-wrapper">
+                <table>
+                    <tr>
+                        <th>Event</th>
+                        <th>When It Fires</th>
+                        <th>Use Cases</th>
+                    </tr>
+                    <tr>
+                        <td><code>PreToolUse</code></td>
+                        <td>Before a tool executes</td>
+                        <td>Validation, blocking dangerous operations</td>
+                    </tr>
+                    <tr>
+                        <td><code>PostToolUse</code></td>
+                        <td>After a tool executes</td>
+                        <td>Auto-formatting, file fixing, notifications</td>
+                    </tr>
+                    <tr>
+                        <td><code>Notification</code></td>
+                        <td>When Claude sends a notification</td>
+                        <td>System alerts, sound cues, integrations</td>
+                    </tr>
+                </table>
+            </div>
+
+            <p>Each hook entry has a <code>matcher</code> (which tool or pattern to match) and an array of hook
+                commands to run.</p>
+
+            <h3>Scaffolded Hooks</h3>
+
+            <div class="card">
+                <h4>Shell Script Fixer (PostToolUse)</h4>
+                <p><strong>Matcher:</strong> <code>Write</code></p>
+                <p>Automatically fixes CRLF line endings and sets executable permissions on <code>.sh</code> files
+                    whenever Claude writes one. This replaces the manual "Critical: Shell Script Line Endings" warning
+                    from v3.0.</p>
+                <pre><code>{
+  "matcher": "Write",
+  "hooks": [{
+    "type": "command",
+    "command": "jq -r '.tool_input.file_path // empty' | xargs -I{} sh -c 'case \"{}\" in *.sh) sed -i \"\" \"s/\\r$//\" \"{}\" && chmod +x \"{}\" ;; esac'"
+  }]
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h4>Notification Alert (Notification)</h4>
+                <p><strong>Matcher:</strong> <code>""</code> (matches all notifications)</p>
+                <p>Sends a macOS notification when Claude Code needs your attention, so you can work in other apps
+                    while waiting.</p>
+                <pre><code>{
+  "matcher": "",
+  "hooks": [{
+    "type": "command",
+    "command": "osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\"' 2>/dev/null || true"
+  }]
+}</code></pre>
+            </div>
+
+            <h3>Adding More Hooks</h3>
+
+            <p>To add your own hooks, edit <code>.claude/settings.json</code> and add entries to the appropriate event
+                array. Examples of useful custom hooks:</p>
+
+            <ul>
+                <li><strong>Auto-format on save:</strong> Run <code>prettier</code> or <code>black</code> after Write</li>
+                <li><strong>Lint check:</strong> Run linter after file modifications</li>
+                <li><strong>Sound alert:</strong> Play a sound on Notification events</li>
+                <li><strong>Slack integration:</strong> Post to a channel when Claude finishes a task</li>
+            </ul>
+
+            <div class="callout callout-info">
+                <strong>Tip:</strong> Use <code>.claude/settings.local.json</code> for personal hooks that shouldn't
+                be shared with the team (e.g., sound alerts or personal notification preferences).
+            </div>
+        </section>
+
+        <!-- RULES -->
+        <section id="rules">
+            <h2>Rules</h2>
+
+            <p>The <code>.claude/rules/</code> directory contains modular rule files that Claude loads automatically.
+                Rules can be scoped to specific file paths using YAML frontmatter.</p>
+
+            <h3>How Rules Work</h3>
+
+            <ol>
+                <li>Place <code>.md</code> files in <code>.claude/rules/</code></li>
+                <li>Claude loads all rules at session start</li>
+                <li>Rules with <code>paths:</code> frontmatter only activate when working on matching files</li>
+                <li>Rules without frontmatter apply globally</li>
+            </ol>
+
+            <h3>Path-Specific Rules</h3>
+
+            <p>Use YAML frontmatter with <code>paths:</code> to scope rules to specific directories:</p>
+
+            <pre><code>---
+paths:
+  - "src/**"
+---
+
+# Code Style
+
+- Use consistent naming conventions
+- Keep functions focused
+- Use environment variables for configuration</code></pre>
+
+            <p>This rule only loads when Claude is working on files matching <code>src/**</code>.</p>
+
+            <h3>Scaffolded Rules</h3>
+
+            <div class="card">
+                <h4>.claude/rules/code-style.md</h4>
+                <p><strong>Scope:</strong> <code>src/**</code></p>
+                <p>Language-agnostic code conventions: naming, function design, configuration, security.
+                    Customize for your specific language and framework.</p>
+            </div>
+
+            <div class="card">
+                <h4>.claude/rules/testing.md</h4>
+                <p><strong>Scope:</strong> <code>tests/**</code></p>
+                <p>Testing standards: coverage targets, test patterns, mocking strategy.
+                    Customize for your test framework.</p>
+            </div>
+
+            <h3>Adding More Rules</h3>
+
+            <p>Create new <code>.md</code> files in <code>.claude/rules/</code> for different concerns:</p>
+
+            <pre><code># Example: .claude/rules/api-design.md
+---
+paths:
+  - "src/api/**"
+  - "src/routes/**"
+---
+
+# API Design Rules
+
+- Use RESTful conventions
+- Always validate request bodies
+- Return consistent error formats
+- Include pagination for list endpoints</code></pre>
+
+            <div class="callout callout-info">
+                <strong>Tip:</strong> Reference rules from CLAUDE.md using <code>@import .claude/rules/code-style.md</code>
+                syntax to make the relationship explicit.
             </div>
         </section>
 
@@ -669,7 +877,7 @@ claude
         <section id="plugins">
             <h2>Global Plugins & Skills</h2>
 
-            <p>v3.0 documents available global plugins directly in CLAUDE.md. These are pre-installed capabilities
+            <p>v4.0 documents available global plugins directly in CLAUDE.md. These are pre-installed capabilities
                 you can use across all projects.</p>
 
             <h3>Available Global Plugins</h3>
@@ -701,12 +909,19 @@ claude
                         <td>/frontend-design</td>
                         <td>Production-grade UI development</td>
                     </tr>
-                    <tr>
-                        <td>ralph-loop</td>
-                        <td>/ralph-loop, /cancel-ralph</td>
-                        <td>Background processing loop</td>
-                    </tr>
                 </table>
+            </div>
+
+            <h3>Agent Teams</h3>
+
+            <div class="card">
+                <h4><span class="badge badge-new">New</span> Agent Teams (Experimental)</h4>
+                <p>Agent teams are Claude Code's new direction for multi-agent workflows. They replace loop-based
+                    plugins like ralph-loop with a more structured approach to background processing and parallel
+                    agent coordination.</p>
+                <p>Agent teams allow you to define specialized agents that work together on complex tasks,
+                    each with their own tools and context. This is an experimental feature &mdash; check the Claude Code
+                    documentation for the latest status.</p>
             </div>
 
             <h3>Skill Shortcuts</h3>
@@ -760,7 +975,7 @@ claude
                 <div class="card">
                     <h4>1. Tests</h4>
                     <ul>
-                        <li>pytest with >80% coverage</li>
+                        <li>Run your test suite, aim for >80% coverage</li>
                         <li>Test success AND failure paths</li>
                         <li>Mock external dependencies</li>
                     </ul>
@@ -768,7 +983,7 @@ claude
                 <div class="card">
                     <h4>2. Documentation</h4>
                     <ul>
-                        <li>Docstrings with Args/Returns/Raises</li>
+                        <li>Docstrings/comments for public APIs</li>
                         <li>Comments for complex logic only</li>
                     </ul>
                 </div>
@@ -787,40 +1002,30 @@ claude
                 reliable and maintainable.
             </div>
 
-            <h3>Session Protocol</h3>
+            <h3>Session Continuity</h3>
 
-            <h4>At Start of Session</h4>
-            <ol>
-                <li>Read <code>PROJECT_STATE.md</code> for current status</li>
-                <li>Read <code>SESSION_LOG.md</code> for recent work and next steps</li>
-                <li>Check <code>git status</code></li>
-            </ol>
+            <p>v4.0 relies on Claude Code's <strong>auto-memory</strong> for session continuity. Claude automatically
+                remembers context from previous sessions without manual logging.</p>
 
-            <h4>At End of Session</h4>
-            <ol>
-                <li>Update <code>SESSION_LOG.md</code> with work completed</li>
-                <li>Commit any uncommitted changes</li>
-                <li>List next steps</li>
-            </ol>
+            <h4>Manual Tracking (Optional)</h4>
+            <p>For projects that need explicit status tracking, <code>PROJECT_STATE.md</code> provides a system
+                status snapshot. Update it after completing features or deployments.</p>
 
-            <h3>Critical Warnings</h3>
-
-            <div class="callout callout-warning">
-                <h4>Shell Script Line Endings</h4>
-                <p>The Write tool outputs CRLF line endings which break shell scripts on macOS/Linux.</p>
-                <p><strong>For ALL .sh files, IMMEDIATELY after writing:</strong></p>
-                <pre><code>sed -i '' 's/\r$//' script.sh && chmod +x script.sh</code></pre>
+            <div class="callout callout-success">
+                <strong>Simplified:</strong> No more SESSION_LOG.md or CONTINUATION_GUIDE.md. Auto-memory handles
+                what those files used to do, and Claude already knows generic workflows like "how to fix a bug."
             </div>
 
+            <h3>Cloud-First Development</h3>
+
             <div class="callout callout-warning">
-                <h4>Cloud-First Development</h4>
-                <p>Never hardcode local paths. Use relative paths or environment variables.</p>
+                <h4>Never Hardcode Local Paths</h4>
+                <p>Use relative paths or environment variables. All code must work in containers.</p>
                 <pre><code># WRONG
-path = '/Users/username/projects/myapp'
+path = "/Users/username/projects/myapp"
 
 # CORRECT
-import os
-path = os.environ.get('APP_ROOT', '/app')</code></pre>
+path = env_var("APP_ROOT", "/app")  # Use your language's equivalent</code></pre>
             </div>
         </section>
 
@@ -831,49 +1036,60 @@ path = os.environ.get('APP_ROOT', '/app')</code></pre>
             <h3>Project Structure</h3>
 
             <pre><code>MyProject/
-├── CLAUDE.md              # Main session reference
-├── PROJECT_STATE.md       # System status
-├── SESSION_LOG.md         # Work history
-├── CONTINUATION_GUIDE.md  # Resume guide
-├── src/                   # Source code
-├── tests/                 # Test files
-├── scripts/               # Utility scripts
+├── CLAUDE.md                  # Main session reference (~80 lines)
+├── CLAUDE.local.md            # Personal overrides (gitignored)
+├── PROJECT_STATE.md           # System status
+├── src/                       # Source code
+├── tests/                     # Test files
+├── docs/                      # Documentation
+├── scripts/                   # Utility scripts
 ├── .claude/
-│   ├── settings.json      # MCP configuration
-│   └── skills/            # Custom skills
+│   ├── settings.json          # Permissions, hooks, MCP config
+│   ├── settings.local.json    # Personal overrides (gitignored)
+│   ├── rules/                 # Modular rule files
+│   │   ├── code-style.md      # Code conventions (src/**)
+│   │   └── testing.md         # Testing standards (tests/**)
+│   ├── hooks/                 # Custom hook scripts
+│   └── skills/
 │       └── commit/
-│           └── SKILL.md
+│           └── SKILL.md       # Commit skill (with frontmatter)
 └── .github/
     └── workflows/
-        └── ci.yml         # CI pipeline</code></pre>
+        └── ci.yml             # CI pipeline template</code></pre>
 
-            <h3>Common Commands</h3>
+            <h3>Key Files</h3>
 
             <div class="table-wrapper">
                 <table>
                     <tr>
-                        <th>Task</th>
-                        <th>Command</th>
+                        <th>File</th>
+                        <th>Purpose</th>
+                        <th>Committed</th>
                     </tr>
                     <tr>
-                        <td>Run tests</td>
-                        <td><code>pytest -v</code></td>
+                        <td><code>CLAUDE.md</code></td>
+                        <td>Main instructions (auto-loaded)</td>
+                        <td>Yes</td>
                     </tr>
                     <tr>
-                        <td>Check coverage</td>
-                        <td><code>pytest --cov=src</code></td>
+                        <td><code>CLAUDE.local.md</code></td>
+                        <td>Personal overrides</td>
+                        <td>No</td>
                     </tr>
                     <tr>
-                        <td>Git status</td>
-                        <td><code>git status</code></td>
+                        <td><code>.claude/settings.json</code></td>
+                        <td>Shared config, hooks, permissions</td>
+                        <td>Yes</td>
                     </tr>
                     <tr>
-                        <td>Recent commits</td>
-                        <td><code>git log --oneline -5</code></td>
+                        <td><code>.claude/settings.local.json</code></td>
+                        <td>Personal config overrides</td>
+                        <td>No</td>
                     </tr>
                     <tr>
-                        <td>Check CI</td>
-                        <td><code>gh run list --limit 3</code></td>
+                        <td><code>.claude/rules/*.md</code></td>
+                        <td>Modular, path-specific rules</td>
+                        <td>Yes</td>
                     </tr>
                 </table>
             </div>
@@ -895,7 +1111,7 @@ path = os.environ.get('APP_ROOT', '/app')</code></pre>
     </div>
 
     <footer>
-        <p>Claude Code Project Setup v3.0 - January 2026</p>
+        <p>Claude Code Project Setup v4.0 - February 2026</p>
         <p style="margin-top: 0.5rem;">Created by <a href="https://shellypalmer.com/ai">Shelly Palmer</a></p>
     </footer>
 
